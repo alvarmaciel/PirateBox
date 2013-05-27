@@ -1,0 +1,19 @@
+# vim: ft=jproperties
+
+[*]
+@import url(data.en.properties)
+hello=Hello!
+hello.accesskey=h
+hello.title=click me
+sayHello=Hello Mozilla!\nHello, world!
+Children=Translate a node with children. 
+Child=I'm his child.
+
+[es]
+@import url(data.es.properties)
+hello=¡Hola!
+hello.accesskey=h
+hello.title=haga clic aquí
+sayHello=¡Hola Mozilla!\n¡Hola, mundo!
+Children=Traducir un nodo con sus hijos. 
+Child=Yo soy su hijo.
