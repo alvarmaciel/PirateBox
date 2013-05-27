@@ -3,7 +3,26 @@
 <head>
 	<link rel="stylesheet" href="style/main.css" />
 	<link rel="shortcut icon" href="style/images/favicon.ico">
-	<title>PirateBox - Share Freely</title>
+	<title data-l10n-id="title">PirateBox - Share Freely</title>
+    <link rel="prefetch" type="application/l10n" href="l10n/locales.ini" />
+    <script type="text/javascript" src="js/l10n.js"></script>
+    <script type="text/javascript">
+			function onLocalized() {
+			  var l10n = document.webL10n,
+				  textProp = document.body.textContent ? 'textContent' : 'innerText',
+				  ui = {
+				    lang: document.getElementsByTagName('select')[0]
+				  };
+			  ui.lang.value = l10n.getLanguage(); // not working with IE<9
+			  ui.lang.onchange = function() {
+				l10n.setLanguage(this.value || this.options[this.selectedIndex].text);
+			  };
+			  ui.l10n[textProp] = l10n.getText();
+			  ui.json[textProp] =
+				window.JSON ? JSON.stringify(l10n.getData(), undefined, 2) : 'no JSON support';
+			}
+			document.webL10n.ready(onLocalized);
+  	</script>
 	<script src="js/jquery.min.js"/>	
 	<script type="text/javascript">
 	
@@ -81,10 +100,19 @@
   
 	<nav id="top_nav">
 		<ul>
-			<li><a class="links" href="index.html" title="Home page">Home</a></li>
-			<li><a class="links" href="/Shared" target="blank" title="Browse & Download files">Download</a></li>
-			<li><a class="links" href="" title="Under construction...">Forum</a></li>
-			<li><a class="links" href="mindex.html" title="For mobile users">Mobile</a></li>
+			<li><a class="links" href="index.html" title="Home page" data-l10n-id="home">Home</a></li>
+			<li><a class="links" href="/Shared" target="blank" title="Browse & Download files" data-l10n-id="download">Download</a></li>
+			<li><a class="links" href="" title="Under construction..." data-l10n-id="forum">Forum</a></li>
+			<li><a class="links" href="mindex.html" title="For mobile users" data-l10n-id="mobile">Mobile</a></li>
+			<li><p style="text-align: right; color: rgb(233, 233, 233);">
+				<span data-l10n-id="langSelection">Language selection</span>
+        		<select>
+          			<option disabled selected></option>
+			        <option>en</option>
+          			<option>es</option>
+        		</select>
+				</p>
+			</li>
 		</ul>
 	</nav>
 	<div id="contents">
