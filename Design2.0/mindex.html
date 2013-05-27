@@ -4,7 +4,26 @@
 	<meta name="viewport" content="width="480" />
 	<link rel="stylesheet" href="style/mobile.css" media="handheld,all">
 	<link rel="shortcut icon" href="style/images/favicon.ico">
-	<title>PirateBox - Mobile</title>
+	<title data-l10n-id="titleMobile">PirateBox - Mobile</title>
+    <link rel="prefetch" type="application/l10n" href="l10n/locales.ini" />
+    <script type="text/javascript" src="js/l10n.js"></script>
+    <script type="text/javascript">
+			function onLocalized() {
+			  var l10n = document.webL10n,
+				  textProp = document.body.textContent ? 'textContent' : 'innerText',
+				  ui = {
+				    lang: document.getElementsByTagName('select')[0]
+				  };
+			  ui.lang.value = l10n.getLanguage(); // not working with IE<9
+			  ui.lang.onchange = function() {
+				l10n.setLanguage(this.value || this.options[this.selectedIndex].text);
+			  };
+			  ui.l10n[textProp] = l10n.getText();
+			  ui.json[textProp] =
+				window.JSON ? JSON.stringify(l10n.getData(), undefined, 2) : 'no JSON support';
+			}
+			document.webL10n.ready(onLocalized);
+  	</script>
 	<script src="jquery.min.js"></script>
 		<!-- I have included jQuery to make things easier. Maybe a mistake for mobile devices? -->
 	<script type="text/javascript">
@@ -73,39 +92,47 @@ interval = window.setInterval( 'refresh()', 60000 );
   <body>
 	<nav id="top_nav">
 		<ul>
-			<li><a class="links" href="index.html" title="Return to browser version!" onclick="sessionStorage['mobile']=false">Browser</a></li>
-			<li><a class="links" href="/Shared" target="blank" title="Browse PirateBox">Download</a></li>
-			
+			<li><a class="links" href="index.html" title="Return to browser version!" onclick="sessionStorage['mobile']=false" data-l10n-id="browser">Browser</a></li>
+			<li><a class="links" href="/Shared" target="blank" title="Browse PirateBox" data-l10n-id="download">Download</a></li>
+			<li><p style="text-align: right; color: rgb(233, 233, 233);">
+				<span data-l10n-id="langSelection">Language selection</span>
+        		<select>
+          			<option disabled selected></option>
+			        <option>en</option>
+          			<option>es</option>
+        		</select>
+				</p>
+			</li>			
 		</ul>
 	</nav>
  <div id="page">
 	<div id="contents">
 		<section id="main">
 			<article class="special">
-			<h3>Welcome to my "PirateBox"!</h3>
-			<h2>Nothing illegal, just a cool, social place</h2>
-			<p>Now first of all, there is nothing illegal going on here, this is a social place where you can chat with people around you and share files absolutely anonymously!
+			<h3 data-l10n-id="welcomePirateBox">Welcome to my "PirateBox"!</h3>
+			<h2 data-l10n-id="socialPlace">Nothing illegal, just a cool, social place</h2>
+			<p data-l10n-id="welcomeDescription">Now first of all, there is nothing illegal going on here, this is a social place where you can chat with people around you and share files absolutely anonymously!
 			No data is logged and you are on pourpose not connected to the internet to maintain your anonymity.
 			This is only a local network (Wi-Fi) hence you have to remain in range if you wish to stay connected.
 			Please have fun, chat with people and also feel free to share any files you may like.</p>		
 			</article>			
 			<article>
 			<article>
-				<h3>Welcome to the Chat!<h3>
-				<h2>It is 100% Anonymous.</h2>
+				<h3 data-l10n-id="welcomeChat">Welcome to the Chat!<h3>
+				<h2 data-l10n-id="chatNetwork">It is 100% Anonymous.</h2>
 				<div class="shoutbox_content" id="shoutbox"></div>
 				<form method="POST" name="psowrte" id="sb_form" >
-				Name:<input type="text" value="Anonymous" name="name" size="10">&nbsp;&nbsp; Message:<input type="text" name="data" size="20" id='sb_form_text' >&nbsp;&nbsp;<input type="submit" value="Say!" name="submit"/>
-				<br /><b>Color:</b> Default<input type="radio" value="def" name="color" checked> |
-				<font color="#0000FF">Blue</font><input type="radio" value="blue" name="color">
-				| <font color="#008000">Green</font><input type="radio" value="green" name="color">
-				| <font color="#FF8040">Orange</font><input type="radio" value="orange" name="color">
-				| <font color="#FF0000">Red</font><input type="radio" value="red" name="color"></p>				
-				</form>				
+				<span data-l10n-id="name">Name:</span><input type="text" value="Anonymous" name="name" size="10" data-l10n-id="anonymous">&nbsp;&nbsp; <span data-l10n-id="message">Message:</span><input type="text" name="data" size="20" id='sb_form_text' >&nbsp;&nbsp;<input type="submit" value="Say!" name="submit" data-l10n-id="say"/>
+				<br /><b><span data-l10n-id="color">Color:</span></b> <span data-l10n-id="default">Default</span><input type="radio" value="def" name="color" checked> |
+				<font color="#0000FF"><span data-l10n-id="blue">Blue</span></font><input type="radio" value="blue" name="color">
+				| <font color="#008000"><span data-l10n-id="green">Green</span></font><input type="radio" value="green" name="color">
+				| <font color="#FF8040"><span data-l10n-id="orange">Orange</span></font><input type="radio" value="orange" name="color">
+				| <font color="#FF0000"><span data-l10n-id="red">Red</span></font><input type="radio" value="red" name="color"></p>				
+				</form>					
 			</article>
 			<article>
-			<h1>Send a file!</h1>
-			<iframe  width='100%' height="80px" frameBorder='0' src='http://piratebox.lan:8080'>Your browser does not supprt Iframes.. If you want to upload something, follow this <a href='http://piratebox.lan:8080'>Link</a></iframe>
+			<h1 data-l10n-id="upload">Upload a file!</h1>
+				<iframe  width='350' height="80px" frameBorder='0' src='http://piratebox.lan:8080'><span data-l10n-id="notSupportIframes">Your browser does not support Iframes.. If you want to upload something, follow this <a href='http://piratebox.lan:8080'>Link<>/a></span></iframe>
 			</article>
 		</section>
 	</div>		
@@ -113,10 +140,10 @@ interval = window.setInterval( 'refresh()', 60000 );
 		
 </div>
 <footer id="footer">
-<h3>About the PirateBox</h3>
-<p>Inspired by pirate radio and the free culture movment, PirateBox is a self-contained mobile collaboration and file sharing device. PirateBox utilizes Free, Libre and Open Source software (FLOSS) to create mobile wireless file sharing networks where users can anonymously share images, video, audio, documents, and other digital content.</p>
-<p>PirateBox is designed to be safe and secure. No logins are required and no user data is logged. The system is purposely not connected to the Internet in order to prevent tracking and preserve user privacy.</p>
-<p>PirateBox was created by David Darts and is registered under a Free Art License (2011). To learn more about the project or to find out how to build your own PirateBox system, please visit <a href="http://wiki.daviddarts.com/piratebox">http://wiki.daviddarts.com/piratebox</a>.</p>
+<h3 data-l10n-id="about">About the PirateBox</h3>
+<p data-l10n-id="inspired">Inspired by pirate radio and the free culture movment, PirateBox is a self-contained mobile collaboration and file sharing device. PirateBox utilizes Free, Libre and Open Source software (FLOSS) to create mobile wireless file sharing networks where users can anonymously share images, video, audio, documents, and other digital content.</p>
+<p data-l10n-id="designed">PirateBox is designed to be safe and secure. No logins are required and no user data is logged. The system is purposely not connected to the Internet in order to prevent tracking and preserve user privacy.</p>
+<p data-l10n-id="created">PirateBox was created by David Darts and is registered under a Free Art License (2011). To learn more about the project or to find out how to build your own PirateBox system, please visit <a href="http://wiki.daviddarts.com/piratebox">http://wiki.daviddarts.com/piratebox</a>.</p>
 <span id="station_cnt"></span>
 </footer>
 </body>
